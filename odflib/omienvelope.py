@@ -40,7 +40,7 @@ class OMIEnvelope:
         return minidom.parseString(ET.tostring(self.get())).toprettyxml(indent=" "*3)
 
     def write_to_file(self, filename):
-        ET.ElementTree(self.root).write(filename)
+        ET.ElementTree(self.root).write(filename, encoding="UTF-8")
         return
 
 
