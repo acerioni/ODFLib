@@ -13,7 +13,7 @@
 # You should have received a copy of the GNU General Public License
 # along with ODFLib.  If not, see <http://www.gnu.org/licenses/>.
 
-
+import logging
 import xml.etree.cElementTree as ET
 from xml.dom import minidom
 
@@ -30,20 +30,18 @@ class OMIEnvelope:
         self.msg = ET.SubElement(self.sub, "msg")
 
     def add_objects(self, objects):
-        self.msg.append(objects.get())
+        self.msg.append(objects.getroot())
         return self
 
-    def get(self):
+    def getroot(self):
         return ET.ElementTree(self.root).getroot()
 
     def __str__(self):
-        return minidom.parseString(ET.tostring(self.get())).toprettyxml(indent=" "*3)
+        return minidom.parseString(ET.tostring(self.getroot())).toprettyxml(indent=" "*3)
 
     def write_to_file(self, filename):
         ET.ElementTree(self.root).write(filename, encoding="UTF-8")
         return
-
-
 
 if __name__ == '__main__':
 

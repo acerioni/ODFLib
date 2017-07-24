@@ -16,7 +16,7 @@
 from .version import __version__
 from .infoitem import *
 from .object import *
-from .objectlist import *
+from .objects import *
 from .omienvelope import *
 
 #__all__ = ['infoitem', 'object', 'objectlist', 'omienvelope']

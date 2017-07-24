@@ -13,11 +13,11 @@
 # You should have received a copy of the GNU General Public License
 # along with ODFLib.  If not, see <http://www.gnu.org/licenses/>.
 
-
+import logging
 import xml.etree.cElementTree as ET
 from xml.dom import minidom
 
-class ObjectList:
+class Objects:
 
     def __init__(self):
         self.root = ET.Element('Objects')
@@ -26,14 +26,18 @@ class ObjectList:
         #self.root.set('xmlns:odf', 'http://www.opengroup.org/xsd/odf/1.0/')
 
     def add_object(self, object):
-        self.root.append(object.get())
+        # any object SHOULD have at least an id
+        if len(object.getroot().findall('./id')) > 0:
+            self.root.append(object.getroot())
+        else:
+            logging.warning('Missing object id.')
         return self
 
-    def get(self):
+    def getroot(self):
         return ET.ElementTree(self.root).getroot()
 
     def __str__(self):
-        return minidom.parseString( ET.tostring(self.get()) ).toprettyxml(indent=" "*3)
+        return minidom.parseString( ET.tostring(self.getroot()) ).toprettyxml(indent=" "*3)
 
 
 if __name__ == '__main__':
