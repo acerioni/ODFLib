@@ -15,7 +15,6 @@
 
 import logging
 import xml.etree.cElementTree as ET
-from datetime import datetime
 from xml.dom import minidom
 
 #__all__ = ['infoitem']
@@ -104,6 +103,7 @@ class InfoItem():
 
 if __name__ == '__main__':
 
+    from datetime import datetime
     myInfoItem = InfoItem('myInfoItem')
     #myInfoItem.add_name('myName')
     myInfoItem.add_value( "1.23", dateTime = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%S.%fZ') )
